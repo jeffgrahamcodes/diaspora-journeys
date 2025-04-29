@@ -2,7 +2,6 @@ const fs = require('fs');
 const express = require('express');
 
 const app = express();
-
 app.use(express.json());
 
 const journeys = JSON.parse(
@@ -11,7 +10,7 @@ const journeys = JSON.parse(
 
 const baseApiUrl = '/api/v1/journeys';
 
-app.get(`${baseApiUrl}`, (req, res) => {
+const getAllJourneys = (req, res) => {
   res.status(200).json({
     status: 'success',
     results: journeys.length,
@@ -19,9 +18,9 @@ app.get(`${baseApiUrl}`, (req, res) => {
       journeys,
     },
   });
-});
+};
 
-app.get(`${baseApiUrl}/:id`, (req, res) => {
+const getJourney = (req, res) => {
   const id = parseInt(req.params.id);
 
   const journey = journeys.find((journey) => journey.id === id);
@@ -38,9 +37,9 @@ app.get(`${baseApiUrl}/:id`, (req, res) => {
       journey,
     },
   });
-});
+};
 
-app.post(`${baseApiUrl}`, (req, res) => {
+const createJourney = (req, res) => {
   const newId = journeys.length;
   const newJourney = Object.assign({ id: newId }, req.body);
 
@@ -57,9 +56,9 @@ app.post(`${baseApiUrl}`, (req, res) => {
       });
     }
   );
-});
+};
 
-app.patch(`${baseApiUrl}/:id`, (req, res) => {
+const updateJourney = (req, res) => {
   const id = parseInt(req.params.id);
 
   const journey = journeys.find((journey) => journey.id === id);
@@ -73,9 +72,9 @@ app.patch(`${baseApiUrl}/:id`, (req, res) => {
     status: 'success',
     data: 'updatedTour',
   });
-});
+};
 
-app.delete(`${baseApiUrl}/:id`, (req, res) => {
+const deleteJourney = (req, res) => {
   const id = parseInt(req.params.id);
 
   const journey = journeys.find((journey) => journey.id === id);
@@ -89,7 +88,15 @@ app.delete(`${baseApiUrl}/:id`, (req, res) => {
     status: 'success',
     data: null,
   });
-});
+};
+
+app.route(baseApiUrl).get(getAllJourneys).post(createJourney);
+
+app
+  .route(`${baseApiUrl}/:id`)
+  .get(getJourney)
+  .patch(updateJourney)
+  .delete(deleteJourney);
 
 const PORT = 3000;
 app.listen(PORT, () => {
