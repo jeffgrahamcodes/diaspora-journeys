@@ -1,0 +1,97 @@
+[
+  {
+    "id": 0,
+    "name": "The Palm Cove Escape",
+    "duration": 5,
+    "maxGroupSize": 25,
+    "difficulty": "family-friendly",
+    "ratingsAverage": 4.7,
+    "ratingsQuantity": 37,
+    "price": 499,
+    "summary": "Relax and unwind on the serene beaches of Palm Cove",
+    "description": "Enjoy stunning sunsets, gentle waves, and palm-lined shores. Perfect for families, couples, and solo travelers looking for peaceful retreats.",
+    "imageCover": "beach-1-cover.jpg",
+    "images": ["beach-1-1.jpg", "beach-1-2.jpg", "beach-1-3.jpg"],
+    "startDates": [
+      "2024-05-15,10:00",
+      "2024-07-10,10:00",
+      "2024-09-05,10:00"
+    ]
+  },
+  {
+    "id": 1,
+    "name": "The Coral Coast Explorer",
+    "duration": 7,
+    "maxGroupSize": 15,
+    "difficulty": "adventurous",
+    "ratingsAverage": 4.8,
+    "ratingsQuantity": 23,
+    "price": 699,
+    "summary": "Discover vibrant coral reefs and tropical marine life",
+    "description": "Dive and snorkel in crystal-clear waters, explore hidden lagoons, and experience the thrill of ocean adventures along the Coral Coast.",
+    "imageCover": "beach-2-cover.jpg",
+    "images": ["beach-2-1.jpg", "beach-2-2.jpg", "beach-2-3.jpg"],
+    "startDates": [
+      "2024-06-12,10:00",
+      "2024-08-20,10:00",
+      "2024-10-18,10:00"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "The Sunset Bay Getaway",
+    "duration": 4,
+    "maxGroupSize": 10,
+    "difficulty": "family-friendly",
+    "ratingsAverage": 4.5,
+    "ratingsQuantity": 13,
+    "price": 599,
+    "summary": "Chase stunning sunsets on the golden sands of Sunset Bay",
+    "description": "From kayaking adventures to bonfire nights, Sunset Bay offers the perfect blend of relaxation and fun-filled activities by the sea.",
+    "imageCover": "beach-3-cover.jpg",
+    "images": ["beach-3-1.jpg", "beach-3-2.jpg", "beach-3-3.jpg"],
+    "startDates": [
+      "2024-04-15,10:00",
+      "2024-06-20,10:00",
+      "2024-08-25,10:00"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "The Hidden Lagoon Retreat",
+    "duration": 6,
+    "maxGroupSize": 20,
+    "difficulty": "private",
+    "ratingsAverage": 4.6,
+    "ratingsQuantity": 54,
+    "price": 999,
+    "summary": "Secluded beaches and luxury private villas await",
+    "description": "Escape to untouched lagoons and secret beaches with crystal-clear waters. Perfect for those seeking ultimate relaxation and privacy.",
+    "imageCover": "beach-4-cover.jpg",
+    "images": ["beach-4-1.jpg", "beach-4-2.jpg", "beach-4-3.jpg"],
+    "startDates": [
+      "2024-03-11,10:00",
+      "2024-05-02,10:00",
+      "2024-07-09,10:00"
+    ]
+  },
+  {
+    "id": 4,
+    "name": "The Surf Haven",
+    "duration": 10,
+    "maxGroupSize": 15,
+    "difficulty": "adventurous",
+    "ratingsAverage": 4.9,
+    "ratingsQuantity": 19,
+    "price": 1499,
+    "summary": "Catch the best waves at the world's top surf destination",
+    "description": "From beginners to pros, Surf Haven offers top-notch instructors, epic waves, and unforgettable beach vibes for all surf lovers.",
+    "imageCover": "beach-5-cover.jpg",
+    "images": ["beach-5-1.jpg", "beach-5-2.jpg", "beach-5-3.jpg"],
+    "startDates": [
+      "2024-08-05,10:00",
+      "2025-03-20,10:00",
+      "2025-08-12,10:00"
+    ]
+  }
+]
