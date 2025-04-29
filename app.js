@@ -71,9 +71,23 @@ app.patch(`${baseApiUrl}/:id`, (req, res) => {
   }
   res.status(200).json({
     status: 'success',
-    data: {
-      tour: 'updatedTour',
-    },
+    data: 'updatedTour',
+  });
+});
+
+app.delete(`${baseApiUrl}/:id`, (req, res) => {
+  const id = parseInt(req.params.id);
+
+  const journey = journeys.find((journey) => journey.id === id);
+
+  if (!journey) {
+    return res
+      .status(404)
+      .json({ status: 'fail', message: 'Invalid ID' });
+  }
+  res.status(204).json({
+    status: 'success',
+    data: null,
   });
 });
 
