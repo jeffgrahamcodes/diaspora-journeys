@@ -4,8 +4,21 @@ const journeys = JSON.parse(
   fs.readFileSync(`${__dirname}/../data/journeys-simple.json`)
 );
 
+const findJourneyById = (id) =>
+  journeys.find((journey) => journey.id === parseInt(id));
+
+exports.checkId = (req, res, next, val) => {
+  console.log(`Journey id is: ${val}`);
+
+  const journey = findJourneyById(val);
+
+  if (!journey) {
+    return res.status(404).json({ status: 'fail', message: 'Invalid ID' });
+  }
+  next();
+};
+
 exports.getAllJourneys = (req, res) => {
-  console.log(req.requestTime);
   res.status(200).json({
     status: 'success',
     requestedAt: req.requestTime,
@@ -17,15 +30,7 @@ exports.getAllJourneys = (req, res) => {
 };
 
 exports.getJourney = (req, res) => {
-  const id = parseInt(req.params.id);
-
-  const journey = journeys.find((journey) => journey.id === id);
-
-  if (!journey) {
-    return res
-      .status(404)
-      .json({ status: 'fail', message: 'Invalid ID' });
-  }
+  const journey = findJourneyById(req.params.id);
 
   res.status(200).json({
     status: 'success',
@@ -55,15 +60,6 @@ exports.createJourney = (req, res) => {
 };
 
 exports.updateJourney = (req, res) => {
-  const id = parseInt(req.params.id);
-
-  const journey = journeys.find((journey) => journey.id === id);
-
-  if (!journey) {
-    return res
-      .status(404)
-      .json({ status: 'fail', message: 'Invalid ID' });
-  }
   res.status(200).json({
     status: 'success',
     data: 'updatedTour',
@@ -71,15 +67,6 @@ exports.updateJourney = (req, res) => {
 };
 
 exports.deleteJourney = (req, res) => {
-  const id = parseInt(req.params.id);
-
-  const journey = journeys.find((journey) => journey.id === id);
-
-  if (!journey) {
-    return res
-      .status(404)
-      .json({ status: 'fail', message: 'Invalid ID' });
-  }
   res.status(204).json({
     status: 'success',
     data: null,
