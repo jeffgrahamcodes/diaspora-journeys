@@ -139,23 +139,26 @@ const deleteUser = (req, res) => {
 };
 
 // ROUTES
-app
-  .route(`${baseApiUrl}/journeys`)
-  .get(getAllJourneys)
-  .post(createJourney);
+const journeyRouter = express.Router();
+const userRouter = express.Router();
 
-app
-  .route(`${baseApiUrl}/journeys/:id`)
+journeyRouter.route('/').get(getAllJourneys).post(createJourney);
+
+journeyRouter
+  .route('/:id')
   .get(getJourney)
   .patch(updateJourney)
   .delete(deleteJourney);
 
-app.route(`${baseApiUrl}/users`).get(getAllUsers).post(createUser);
-app
-  .route(`${baseApiUrl}/users/:id`)
+userRouter.route('/').get(getAllUsers).post(createUser);
+userRouter
+  .route('/:id')
   .get(getUser)
   .patch(updateUser)
   .delete(deleteUser);
+
+app.use(`${baseApiUrl}/journeys`, journeyRouter);
+app.use(`${baseApiUrl}/users`, userRouter);
 
 // SERVER
 const PORT = 3000;
