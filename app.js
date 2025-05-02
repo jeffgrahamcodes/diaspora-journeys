@@ -103,6 +103,41 @@ const deleteJourney = (req, res) => {
   });
 };
 
+const getAllUsers = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'route not yet defined',
+  });
+};
+
+const getUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'route not yet defined',
+  });
+};
+
+const createUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'route not yet defined',
+  });
+};
+
+const updateUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'route not yet defined',
+  });
+};
+
+const deleteUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'route not yet defined',
+  });
+};
+
 // ROUTES
 app
   .route(`${baseApiUrl}/journeys`)
@@ -114,6 +149,13 @@ app
   .get(getJourney)
   .patch(updateJourney)
   .delete(deleteJourney);
+
+app.route(`${baseApiUrl}/users`).get(getAllUsers).post(createUser);
+app
+  .route(`${baseApiUrl}/users/:id`)
+  .get(getUser)
+  .patch(updateUser)
+  .delete(deleteUser);
 
 // SERVER
 const PORT = 3000;
