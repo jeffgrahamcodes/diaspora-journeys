@@ -1,18 +1,31 @@
 const fs = require('fs');
 const express = require('express');
+const morgan = require('morgan');
 
 const app = express();
-app.use(express.json());
-
+const baseApiUrl = '/api/v1';
 const journeys = JSON.parse(
   fs.readFileSync(`${__dirname}/data/journeys-simple.json`)
 );
 
-const baseApiUrl = '/api/v1/journeys';
+// MIDDLEWARE
+app.use(morgan('dev'));
+app.use(express.json());
+app.use((req, res, next) => {
+  console.log('Middleware called');
+  next();
+});
+app.use((req, res, next) => {
+  req.requestTime = new Date().toISOString();
+  next();
+});
 
+// ROUTE HANDLERS
 const getAllJourneys = (req, res) => {
+  console.log(req.requestTime);
   res.status(200).json({
     status: 'success',
+    requestedAt: req.requestTime,
     results: journeys.length,
     data: {
       journeys,
@@ -90,14 +103,19 @@ const deleteJourney = (req, res) => {
   });
 };
 
-app.route(baseApiUrl).get(getAllJourneys).post(createJourney);
+// ROUTES
+app
+  .route(`${baseApiUrl}/journeys`)
+  .get(getAllJourneys)
+  .post(createJourney);
 
 app
-  .route(`${baseApiUrl}/:id`)
+  .route(`${baseApiUrl}/journeys/:id`)
   .get(getJourney)
   .patch(updateJourney)
   .delete(deleteJourney);
 
+// SERVER
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}`);
