@@ -4,8 +4,8 @@ const journeys = JSON.parse(
   fs.readFileSync(`${__dirname}/../data/journeys-simple.json`)
 );
 
-const findJourneyById = (id) =>
-  journeys.find((journey) => journey.id === parseInt(id));
+const findJourneyById = id =>
+  journeys.find(journey => journey.id === parseInt(id, 10));
 
 exports.checkId = (req, res, next, val) => {
   console.log(`Journey id is: ${val}`);
@@ -33,8 +33,8 @@ exports.getAllJourneys = (req, res) => {
     requestedAt: req.requestTime,
     results: journeys.length,
     data: {
-      journeys,
-    },
+      journeys
+    }
   });
 };
 
@@ -44,8 +44,8 @@ exports.getJourney = (req, res) => {
   res.status(200).json({
     status: 'success',
     data: {
-      journey,
-    },
+      journey
+    }
   });
 };
 
@@ -57,12 +57,12 @@ exports.createJourney = (req, res) => {
   fs.writeFile(
     `${__dirname}/data/journeys-simple.json`,
     JSON.stringify(journeys),
-    (err) => {
+    err => {
       res.status(201).json({
         status: 'success',
         data: {
-          journey: newJourney,
-        },
+          journey: newJourney
+        }
       });
     }
   );
@@ -71,13 +71,13 @@ exports.createJourney = (req, res) => {
 exports.updateJourney = (req, res) => {
   res.status(200).json({
     status: 'success',
-    data: 'updatedTour',
+    data: 'updatedTour'
   });
 };
 
 exports.deleteJourney = (req, res) => {
   res.status(204).json({
     status: 'success',
-    data: null,
+    data: null
   });
 };
