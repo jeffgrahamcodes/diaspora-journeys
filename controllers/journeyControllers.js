@@ -19,7 +19,23 @@ exports.getAllJourneys = async (req, res) => {
   }
 };
 
-exports.getJourney = (req, res) => {};
+exports.getJourney = async (req, res) => {
+  try {
+    const journey = await Journey.findById(req.params.id);
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        journey
+      }
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: 'fail',
+      message: error
+    });
+  }
+};
 
 exports.createJourney = async (req, res) => {
   try {
