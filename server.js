@@ -18,38 +18,6 @@ mongoose
   })
   .then(() => console.log('DB connection successful'));
 
-const journeySchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, 'Journey must have a name'],
-    unique: true
-  },
-  price: {
-    type: Number,
-    required: [true, 'Journey must have a price']
-  },
-  rating: {
-    type: Number,
-    default: 4.5
-  }
-});
-
-const Journey = mongoose.model('Journey', journeySchema);
-
-const testJourney = new Journey({
-  name: 'Roots of Bahia',
-  price: 1099
-});
-
-testJourney
-  .save()
-  .then(doc => {
-    console.log(doc);
-  })
-  .catch(err => {
-    console.log(err);
-  });
-
 const app = require('./app');
 
 const PORT = process.env.PORT || 3000;

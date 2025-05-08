@@ -5,19 +5,15 @@ const {
   createJourney,
   getJourney,
   updateJourney,
-  deleteJourney,
-  checkId,
-  checkBody
+  deleteJourney
 } = require('../controllers/journeyControllers');
 
 const router = express.Router();
 
-router.param('id', checkId);
-
 router
   .route('/')
   .get(getAllJourneys)
-  .post(checkBody, createJourney);
+  .post(createJourney);
 
 router
   .route('/:id')

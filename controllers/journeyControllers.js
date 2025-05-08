@@ -1,83 +1,42 @@
-const fs = require('fs');
-
-const journeys = JSON.parse(
-  fs.readFileSync(`${__dirname}/../data/journeys-simple.json`)
-);
-
-const findJourneyById = id =>
-  journeys.find(journey => journey.id === parseInt(id, 10));
-
-exports.checkId = (req, res, next, val) => {
-  console.log(`Journey id is: ${val}`);
-
-  const journey = findJourneyById(val);
-
-  if (!journey) {
-    return res.status(404).json({ status: 'fail', message: 'Invalid ID' });
-  }
-  next();
-};
-
-exports.checkBody = (req, res, next) => {
-  if (!req.body.price || !req.body.name) {
-    return res
-      .status(400)
-      .json({ status: 'fail', message: 'name & price required' });
-  }
-  next();
-};
+const Journey = require('../models/journeyModels');
 
 exports.getAllJourneys = (req, res) => {
   res.status(200).json({
     status: 'success',
-    requestedAt: req.requestTime,
-    results: journeys.length,
-    data: {
-      journeys
-    }
+    data: 'To Be Implemented'
   });
 };
 
-exports.getJourney = (req, res) => {
-  const journey = findJourneyById(req.params.id);
+exports.getJourney = (req, res) => {};
 
-  res.status(200).json({
-    status: 'success',
-    data: {
-      journey
-    }
-  });
-};
+exports.createJourney = async (req, res) => {
+  try {
+    const newJourney = await Journey.create(req.body);
 
-exports.createJourney = (req, res) => {
-  const newId = journeys.length;
-  const newJourney = Object.assign({ id: newId }, req.body);
-
-  journeys.push(newJourney);
-  fs.writeFile(
-    `${__dirname}/data/journeys-simple.json`,
-    JSON.stringify(journeys),
-    err => {
-      res.status(201).json({
-        status: 'success',
-        data: {
-          journey: newJourney
-        }
-      });
-    }
-  );
+    res.status(201).json({
+      status: 'success',
+      data: {
+        journey: newJourney
+      }
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: 'fail',
+      message: error
+    });
+  }
 };
 
 exports.updateJourney = (req, res) => {
   res.status(200).json({
     status: 'success',
-    data: 'updatedTour'
+    data: 'To Be Implemented'
   });
 };
 
 exports.deleteJourney = (req, res) => {
-  res.status(204).json({
+  res.status(200).json({
     status: 'success',
-    data: null
+    data: 'To Be Implemented'
   });
 };
