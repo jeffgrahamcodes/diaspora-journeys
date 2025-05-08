@@ -55,11 +55,29 @@ exports.createJourney = async (req, res) => {
   }
 };
 
-exports.updateJourney = (req, res) => {
-  res.status(200).json({
-    status: 'success',
-    data: 'To Be Implemented'
-  });
+exports.updateJourney = async (req, res) => {
+  try {
+    const updatedJourney = await Journey.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+        runValidators: true
+      }
+    );
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        journey: updatedJourney
+      }
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: 'fail',
+      message: error
+    });
+  }
 };
 
 exports.deleteJourney = (req, res) => {
