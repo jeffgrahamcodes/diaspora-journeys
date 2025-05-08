@@ -1,10 +1,22 @@
 const Journey = require('../models/journeyModels');
 
-exports.getAllJourneys = (req, res) => {
-  res.status(200).json({
-    status: 'success',
-    data: 'To Be Implemented'
-  });
+exports.getAllJourneys = async (req, res) => {
+  try {
+    const journeys = await Journey.find();
+
+    res.status(200).json({
+      status: 'success',
+      results: journeys.length,
+      data: {
+        journeys
+      }
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: 'fail',
+      message: error
+    });
+  }
 };
 
 exports.getJourney = (req, res) => {};
