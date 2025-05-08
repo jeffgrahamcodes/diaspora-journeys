@@ -26,7 +26,7 @@ const journeySchema = new mongoose.Schema({
   },
   price: {
     type: Number,
-    req: [true, 'Journey must have a price']
+    required: [true, 'Journey must have a price']
   },
   rating: {
     type: Number,
@@ -35,6 +35,20 @@ const journeySchema = new mongoose.Schema({
 });
 
 const Journey = mongoose.model('Journey', journeySchema);
+
+const testJourney = new Journey({
+  name: 'Roots of Bahia',
+  price: 1099
+});
+
+testJourney
+  .save()
+  .then(doc => {
+    console.log(doc);
+  })
+  .catch(err => {
+    console.log(err);
+  });
 
 const app = require('./app');
 
