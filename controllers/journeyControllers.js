@@ -80,9 +80,18 @@ exports.updateJourney = async (req, res) => {
   }
 };
 
-exports.deleteJourney = (req, res) => {
-  res.status(200).json({
-    status: 'success',
-    data: 'To Be Implemented'
-  });
+exports.deleteJourney = async (req, res) => {
+  try {
+    await Journey.findByIdAndDelete(req.params.id);
+
+    res.status(204).json({
+      status: 'success',
+      data: null
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: 'fail',
+      message: error
+    });
+  }
 };
